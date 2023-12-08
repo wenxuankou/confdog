@@ -1,8 +1,28 @@
 # frozen_string_literal: true
 
+require "redis"
+
 require_relative "confdog/version"
+require_relative "confdog/configuration"
+require_relative "confdog/kv"
 
 module Confdog
-  class Error < StandardError; end
-  # Your code goes here...
+  class << self
+    def version
+      VERSION
+    end
+
+    def setup
+      yield configuration if block_given?
+      Kv.load
+    end
+
+    def configuration
+      @configuration ||= Configuration.new
+    end
+
+    def [](key)
+      Kv.get key
+    end
+  end
 end
