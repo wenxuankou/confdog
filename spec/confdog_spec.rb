@@ -4,7 +4,7 @@ RSpec.describe Confdog do
 
   let(:redis) { Redis.new }
   let(:prefix) { 'confdog.hello' }
-  let(:url) { 'redis://127.0.0.1:6379/0' }
+  let(:url) { ENV['REDIS_URL'] || 'redis://127.0.0.1:6379/0' }
 
   it "has a version number" do
     expect(Confdog::VERSION).not_to be nil
