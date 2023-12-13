@@ -24,5 +24,9 @@ module Confdog
     def [](key)
       Kv.get key
     end
+
+    def method_missing(method_name)
+      Kv.get method_name
+    end
   end
 end
