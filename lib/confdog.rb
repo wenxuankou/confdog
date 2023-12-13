@@ -17,6 +17,11 @@ module Confdog
       Kv.load
     end
 
+    def reload
+      Kv.kv_map = nil
+      Kv.load
+    end
+
     def configuration
       @configuration ||= Configuration.new
     end

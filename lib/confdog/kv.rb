@@ -3,7 +3,7 @@
 module Confdog
   class Kv
     class << self
-      attr_accessor :kv_map
+      attr_writer :kv_map
 
       def load
         keys = conn.keys("#{prefix}.*")
@@ -13,16 +13,16 @@ module Confdog
         end
       end
 
+      def kv_map
+        @kv_map ||= {}
+      end
+
       def prefix
         Confdog.configuration.prefix
       end
 
       def conn
         @conn ||= Redis.new url: Confdog.configuration.url
-      end
-
-      def kv_map
-        @kv_map ||= {}
       end
 
       def get(key)

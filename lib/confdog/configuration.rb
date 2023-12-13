@@ -2,7 +2,7 @@
 
 module Confdog
   class Configuration
-    attr_accessor :url, :prefix
+    attr_writer :url, :prefix
 
     def url
       @url ||= "redis://127.0.0.1:6379/1"
